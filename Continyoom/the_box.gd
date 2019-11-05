@@ -1,5 +1,7 @@
 extends CSGBox
 
+var initial_transform
+
 var velocity = Vector3(0, 0, 0)
 var rotation_velocity = 0
 var falling_velocity = 0
@@ -13,9 +15,15 @@ const SEARCH_HIGH = .5
 const GRAVITY = -.25
 
 func _ready():
+	initial_transform = get_global_transform()
 	pass
 
 func _physics_process(delta):
+	if Input.is_key_pressed(KEY_R):
+		set_global_transform(initial_transform)
+		velocity = Vector3(0, 0, 0)
+		rotation_velocity = 0
+		falling_velocity = 0
 	if Input.is_action_pressed("ui_up"):
 		velocity.z -= MOVE_SPEED
 	if Input.is_action_pressed("ui_down"):
